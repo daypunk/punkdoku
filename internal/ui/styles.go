@@ -28,8 +28,8 @@ func BuildStyles(t theme.Theme) UIStyles {
 	gridColor := lipgloss.Color(t.Palette.GridLine)
 	accent := lipgloss.Color(t.Palette.Accent)
 	return UIStyles{
-		App:              lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)).Background(lipgloss.Color(t.Palette.Background)),
-		Panel:            lipgloss.NewStyle().Padding(1, 2).Border(lipgloss.RoundedBorder()).BorderForeground(accent),
+		App:              lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
+		Panel:            lipgloss.NewStyle().Padding(2, 4).Margin(1, 4).Border(lipgloss.RoundedBorder()).BorderForeground(accent),
 		Banner:           lipgloss.NewStyle().Foreground(accent).Bold(true),
 		MenuItem:         lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
 		MenuItemSelected: lipgloss.NewStyle().Foreground(accent).Bold(true),

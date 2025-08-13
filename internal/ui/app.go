@@ -69,10 +69,9 @@ func (a App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				a.timerEnabled = !a.timerEnabled
 			case "enter":
 				gm, cmd := a.startGame()
-				if cmd != nil { return a, cmd }
 				a.game = gm
 				a.state = stateGame
-				return a, nil
+				return a, cmd
 			case "q", "esc", "ctrl+c":
 				return a, tea.Quit
 			}
@@ -121,7 +120,7 @@ func (a *App) startGame() (Model, tea.Cmd) {
 	cfg.AutoCheck = a.autoCheck
 	cfg.TimerEnabled = a.timerEnabled
 	m := New(g, a.th, cfg)
-	return m, nil
+	return m, m.Init()
 }
 
 func (a App) viewMenu() string {
@@ -130,7 +129,7 @@ func (a App) viewMenu() string {
    / __ \/ / / / __ \/ //_/ __  / __ \/ //_/ / / /
   / /_/ / /_/ / / / / ,< / /_/ / /_/ / ,< / /_/ / 
  / .___/\__,_/_/ /_/_/|_|\__,_/\____/_/|_|\__,_/  
-/_/                          sudoku for punkers                  
+/_/                            sudoku for punks                  
 `
 
 	left := &strings.Builder{}
@@ -148,8 +147,6 @@ func (a App) viewMenu() string {
 			left.WriteString("  " + item + "\n")
 		}
 	}
-	left.WriteString("\n")
-	left.WriteString(a.styles.Hint.Render("a Auto-Check  t Timer  Enter Start  q Quit"))
 
 	panel := a.styles.Panel.Render(left.String())
 	if a.width > 0 && a.height > 0 {
