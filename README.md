@@ -4,7 +4,7 @@
 `punkdoku`는 macOS, Linux, Windows에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
 
 ### Overview
-`punkdoku` is a cross‑platform terminal Sudoku for macOS, Linux, and Windows. It’s written in Go, built on Bubble Tea and Lipgloss for a clean, responsive TUI. Puzzles are generated per difficulty with a focus on uniqueness and reproducibility; Daily mode uses a UTC date‑based seed so everyone plays the same grid. The game ships with input flashes, undo/redo, auto‑check, and a compact timer.
+`punkdoku` is a cross‑platform terminal Sudoku for macOS, Linux, and Windows. It's written in Go, built on Bubble Tea and Lipgloss for a clean, responsive TUI. Puzzles are generated per difficulty with a focus on uniqueness and reproducibility; Daily mode uses a UTC date‑based seed so everyone plays the same grid. The game ships with input flashes, undo/redo, auto‑check, and a compact timer.
 
 ## Features
 - **Cross‑platform TUI**: Runs the same on macOS, Linux, and Windows terminals.
@@ -18,57 +18,68 @@
 
 ## Installation
 
-### One‑line install (after publishing releases)
-Replace `YOUR_ORG` with your GitHub org or username.
-
-- macOS (arm64):
+### One‑line install via Homebrew (Recommended)
 ```bash
-sudo curl -L https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku && sudo chmod +x /usr/local/bin/punkdoku && punkdoku
+brew install daypunk/tap/punkdoku
 ```
 
-- Linux (x86_64):
+### One‑line install via curl (Direct download)
 ```bash
-sudo curl -L https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku && sudo chmod +x /usr/local/bin/punkdoku && punkdoku
-```
-
-- Windows (PowerShell):
-```powershell
-iwr -useb https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-windows.exe -OutFile $env:USERPROFILE\punkdoku.exe; & $env:USERPROFILE\punkdoku.exe
-```
-
-### Build from source
-Prerequisites:
-- Go 1.23+
-
-Commands:
-```bash
-go mod tidy
-CGO_ENABLED=0 go build -ldflags "-s -w" -o punkdoku ./cmd/punkdoku
-./punkdoku
-```
-
-Run without building:
-```bash
-go run ./cmd/punkdoku
-```
-
-### Cross‑compiling examples
-```bash
-# macOS (arm64)
-CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/punkdoku-macos ./cmd/punkdoku
+# macOS (arm64/amd64)
+curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku && chmod +x /usr/local/bin/punkdoku
 
 # Linux (x86_64)
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-linux ./cmd/punkdoku
+curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku && chmod +x /usr/local/bin/punkdoku
 
-# Windows (x86_64)
-CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-windows.exe ./cmd/punkdoku
+# Windows (PowerShell)
+Invoke-WebRequest -Uri "https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-windows.exe" -OutFile "punkdoku.exe"
 ```
 
-> Tip: Publish the three files in `dist/` as GitHub Release assets to enable the one‑line installs above.
+### Run
+```bash
+punkdoku
+```
 
 ## Usage
 
-Launch `punkdoku` and pick a difficulty from the menu. The game view shows `{Difficulty} Mode`, the board, and a status line. With Auto‑Check enabled, conflicts are highlighted immediately. When solved, the status line changes to a clear message; if the timer is off, no time is shown.
+### Getting Started
+1. **Launch the game**: Run `punkdoku` from your terminal
+2. **Select difficulty**: Use arrow keys or `h j k l` to navigate, `Enter` to confirm
+3. **Start playing**: Navigate with arrow keys, input numbers 1-9, clear with 0 or Space
+
+### Main Menu
+- **Easy**: ~38 cells removed, suitable for beginners
+- **Normal**: ~46 cells removed, balanced challenge
+- **Hard**: ~52 cells removed, requires strategy
+- **Nightmare**: ~58 cells removed, expert level
+- **Daily**: Same puzzle for everyone based on UTC date
+
+### Game Controls
+- **Navigation**: Arrow keys or `h j k l` (Vim-style)
+- **Input**: `1-9` to set a number, `0` or `Space` to clear
+- **Undo**: `u` or `Ctrl+Z`
+- **Redo**: `Ctrl+Y` or `Ctrl+R`
+- **Toggle Auto-Check**: `a` (highlights conflicts immediately)
+- **Toggle Timer**: `t` (shows completion time)
+- **Main Menu**: `m` (return to difficulty selection)
+- **Quit**: `q`, `Esc`, or `Ctrl+C`
+
+### Game Features
+- **Auto-Check**: When enabled, shows duplicate numbers and conflicts in real-time
+- **Timer**: Tracks completion time (displayed as MM:SS)
+- **Undo/Redo**: Full move history with keyboard shortcuts
+- **Visual Feedback**: Selected cell highlighting, input animations, color-coded difficulty themes
+
+### Game States
+- **Playing**: Normal gameplay with status line showing Auto-Check, Timer, and controls
+- **Completed**: Success message with completion time (if timer enabled)
+- **Try Again**: Appears when grid is filled but incorrect
+
+### Tips
+- Use Auto-Check to catch mistakes early
+- Daily puzzles are the same for everyone on the same date
+- The timer stops automatically when you complete the puzzle
+- You can return to the main menu anytime with `m`
 
 ## Configuration
 

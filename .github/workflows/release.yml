@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23'
+
+      - name: Build for all platforms
+        run: |
+          mkdir -p dist
+          
+          # macOS (arm64)
+          CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/punkdoku-macos-arm64 ./cmd/punkdoku
+          
+          # macOS (amd64)
+          CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-macos-amd64 ./cmd/punkdoku
+          
+          # Create universal macOS binary
+          lipo -create -output dist/punkdoku-macos dist/punkdoku-macos-arm64 dist/punkdoku-macos-amd64
+          
+          # Linux
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-linux ./cmd/punkdoku
+          
+          # Windows
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-windows.exe ./cmd/punkdoku
+          
+          # Generate checksums
+          shasum -a 256 dist/punkdoku-* > dist/SHA256SUMS.txt
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            dist/punkdoku-macos
+            dist/punkdoku-linux
+            dist/punkdoku-windows.exe
+            dist/SHA256SUMS.txt
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
