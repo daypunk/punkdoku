@@ -65,7 +65,7 @@ jobs:
       - name: Update Homebrew Tap
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
           repository: daypunk/homebrew-tap
           event-type: punkdoku-updated
           client-payload: '{"version": "${{ github.ref_name }}", "tag": "${{ github.ref_name }}"}'
