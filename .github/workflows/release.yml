@@ -5,6 +5,10 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -38,6 +42,11 @@ jobs:
           
           # Generate checksums
           shasum -a 256 dist/punkdoku-* > dist/SHA256SUMS.txt
+          
+          # List files for debugging
+          ls -la dist/
+          echo "=== Checksums ==="
+          cat dist/SHA256SUMS.txt
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -50,5 +59,7 @@ jobs:
           draft: false
           prerelease: false
           generate_release_notes: true
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
