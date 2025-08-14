@@ -43,15 +43,23 @@ func BuildStyles(t theme.Theme) UIStyles {
 		gray = lipgloss.Color("#6b7280") // darker gray for light theme
 	}
 	
+	// 화이트모드에서 메뉴 아이템 색상 조정
+	menuItemColor := lipgloss.Color(t.Palette.Foreground)
+	statusColor := gray // 다크모드에서 상태줄 회색
+	if t.Name == "light" {
+		menuItemColor = lipgloss.Color("#000000") // 화이트모드에서 미선택 난이도 검은색
+		statusColor = menuItemColor // 화이트모드에서 상태줄 검은색
+	}
+	
 	return UIStyles{
 		App:              lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
 		Panel:            lipgloss.NewStyle().Padding(0, 4).Margin(1, 4).Border(lipgloss.RoundedBorder()).BorderForeground(lipgloss.Color(accentColors["panel"])),
 		Banner:           lipgloss.NewStyle().Foreground(accent).Bold(true),
-		MenuItem:         lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
+		MenuItem:         lipgloss.NewStyle().Foreground(menuItemColor),
 		MenuItemSelected: lipgloss.NewStyle().Foreground(accent).Bold(true),
 		Hint:             lipgloss.NewStyle().Foreground(accent),
 
-		BoolTrue:  lipgloss.NewStyle().Foreground(lipgloss.Color(accentColors["success"])).Bold(true),
+		BoolTrue:  lipgloss.NewStyle().Foreground(lipgloss.Color("#16a34a")).Bold(true), // 다크모드에서 어두운 초록색
 		BoolFalse: lipgloss.NewStyle().Foreground(gray),
 
 		Board:         lipgloss.NewStyle(),
@@ -62,7 +70,7 @@ func BuildStyles(t theme.Theme) UIStyles {
 		CellSelected:  lipgloss.NewStyle().Background(lipgloss.Color(t.Palette.CellSelectedBG)).Foreground(lipgloss.Color(t.Palette.CellSelectedFG)).Padding(0, 1).Bold(true),
 		CellDuplicate: lipgloss.NewStyle().Background(lipgloss.Color(t.Palette.CellDuplicateBG)).Padding(0, 1),
 		CellConflict:  lipgloss.NewStyle().Background(lipgloss.Color(t.Palette.CellConflictBG)).Padding(0, 1).Bold(true),
-		Status:        lipgloss.NewStyle().Foreground(gray),
+		Status:        lipgloss.NewStyle().Foreground(statusColor), // 다크모드에서 회색, 화이트모드에서 검은색
 		StatusError:   lipgloss.NewStyle().Foreground(lipgloss.Color(accentColors["error"])).Bold(true),
 
 		DiffBox: lipgloss.NewStyle().Border(lipgloss.RoundedBorder()).BorderForeground(accent).Padding(1, 4),

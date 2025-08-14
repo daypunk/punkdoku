@@ -34,17 +34,17 @@ func Light() Theme {
 		Name: "light",
 		Palette: Palette{
 			Background:      "#ffffff",
-			Foreground:      "#111111",
-			GridLine:        "#cfcfcf",
-			CellBaseBG:      "#f7f7f7",
-			CellBaseFG:      "#1f2937",  // 어두운 회색 (사용자 입력)
-			CellFixedFG:     "#6b7280",
-			CellFixedBG:     "#efefef",
-			CellSelectedBG:  "#cfe3ff",
-			CellSelectedFG:  "#1e40af",  // 어두운 파랑 (선택된 셀)
-			CellDuplicateBG: "#fff2cc",
-			CellConflictBG:  "#ffd6d6",
-			Accent:          "#2563eb",
+			Foreground:      "#000000",  // 메인 텍스트만 검은색
+			GridLine:        "#cfcfcf",  // 그리드 라인 원복
+			CellBaseBG:      "",         // 투명 배경
+			CellBaseFG:      "#000000",  // 입력 텍스트 검은색
+			CellFixedFG:     "#6b7280",  // 고정 숫자 원복
+			CellFixedBG:     "",         // 투명 배경
+			CellSelectedBG:  "#cfe3ff",  // 선택된 셀 배경 원복
+			CellSelectedFG:  "#000000",  // 선택된 셀 텍스트 검은색
+			CellDuplicateBG: "#fff2cc",  // 중복은 배경 유지
+			CellConflictBG:  "#ffd6d6",  // 충돌은 배경 유지
+			Accent:          "#ff6600",  // 주황색 액센트
 		},
 	}
 }
@@ -59,10 +59,10 @@ func Punk() Theme {
 			Background:      "#000000",
 			Foreground:      "#e7f9ff",
 			GridLine:        "#1f2937",
-			CellBaseBG:      "#0b0f14",
+			CellBaseBG:      "",         // 미선택 셀 배경 투명
 			CellBaseFG:      "#e7f9ff",  // 밝은 청백색 (사용자 입력)
 			CellFixedFG:     "#9fb7c6",
-			CellFixedBG:     "#0e141a",
+			CellFixedBG:     "",         // 고정 셀 배경도 투명
 			CellSelectedBG:  "#063a3e",
 			CellSelectedFG:  "#00e5ff",  // 사이언 (선택된 셀)
 			CellDuplicateBG: "#3d2d0a",
@@ -85,40 +85,39 @@ func DetectTheme() Theme {
 
 // hasLightBackground attempts to detect if the terminal has a light background
 func hasLightBackground() bool {
-	// Check environment variables that might indicate light theme
-	if termenv.HasDarkBackground() {
-		return false
-	}
-	
-	// Check for environment variables indicating light theme
-	term := strings.ToLower(os.Getenv("TERM"))
-	colorterm := strings.ToLower(os.Getenv("COLORTERM"))
-	
-	// Some terminal emulators set specific variables for light themes
-	if strings.Contains(term, "light") || strings.Contains(colorterm, "light") {
+	// Primary detection using termenv
+	if !termenv.HasDarkBackground() {
 		return true
 	}
 	
-	// Check for common light theme terminal configurations
-	if iterm2Profile := os.Getenv("ITERM_PROFILE"); iterm2Profile != "" {
-		profileLower := strings.ToLower(iterm2Profile)
-		if strings.Contains(profileLower, "light") || strings.Contains(profileLower, "bright") {
+	// Additional environment variable checks
+	term := strings.ToLower(os.Getenv("TERM"))
+	colorterm := strings.ToLower(os.Getenv("COLORTERM"))
+	termProgram := strings.ToLower(os.Getenv("TERM_PROGRAM"))
+	
+	// Check for light theme indicators in environment variables
+	lightIndicators := []string{"light", "bright", "white"}
+	for _, indicator := range lightIndicators {
+		if strings.Contains(term, indicator) || 
+		   strings.Contains(colorterm, indicator) || 
+		   strings.Contains(termProgram, indicator) {
 			return true
 		}
 	}
 	
-	// macOS Terminal.app profile detection
-	if termProgram := os.Getenv("TERM_PROGRAM"); termProgram == "Apple_Terminal" {
-		// This is a basic heuristic - in practice you might need more sophisticated detection
-		// Check if we can query the terminal for background color
-		output := termenv.NewOutput(termenv.DefaultOutput())
-		if output.Profile == termenv.TrueColor {
-			// TrueColor terminals might support background color queries
-			// but this is complex to implement reliably
+	// Check iTerm2 profile
+	if iterm2Profile := strings.ToLower(os.Getenv("ITERM_PROFILE")); iterm2Profile != "" {
+		for _, indicator := range lightIndicators {
+			if strings.Contains(iterm2Profile, indicator) {
+				return true
+			}
 		}
 	}
 	
-	// Default to dark background if we can't determine
+	// Force detection for testing - uncomment to test light mode
+	// return true
+	
+	// Default to dark background
 	return false
 }
 
@@ -181,10 +180,10 @@ func (ac AdaptiveColors) GetGradientColors() map[string][2]string {
 func (ac AdaptiveColors) GetAccentColors() map[string]string {
 	if ac.theme.Name == "light" {
 		return map[string]string{
-			"selected":  "#eab308", // darker yellow for light bg
-			"panel":     "#6b7280", // darker gray for light bg border
-			"success":   "#16a34a", // darker green for light bg
-			"error":     "#dc2626", // red for light bg
+			"selected":  "#ff6600", // 주황색 선택
+			"panel":     "#6b7280", // 패널 테두리 원복
+			"success":   "#16a34a", // 성공 메시지 원복
+			"error":     "#dc2626", // 빨간색 에러
 		}
 	}
 	// Dark theme accents (original)

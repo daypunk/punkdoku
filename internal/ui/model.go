@@ -205,18 +205,29 @@ func (m Model) StatusLine() string {
 		return m.styles.StatusError.Render("✭ Try again ✭")
 	}
 	// Normal status (fixed width segments)
-	auto := "Auto: OFF"
-	if m.autoCheck { auto = "Auto: ON " } // 화면 너비 고정
+	var auto string
+	if m.autoCheck {
+		auto = m.styles.Status.Render("Auto: ") + m.styles.BoolTrue.Render("ON ") // Auto: 부분은 회색, ON 부분만 초록색
+	} else {
+		auto = m.styles.Status.Render("Auto: OFF")
+	}
+	
 	var timerStr string
 	if m.timerEnabled {
 		secs := int(m.elapsed.Truncate(time.Second).Seconds())
 		mins := (secs / 60) % 100
 		s := secs % 60
-		timerStr = fmt.Sprintf("Timer: %02d:%02d", mins, s)
+		timeValue := fmt.Sprintf("%02d:%02d", mins, s)
+		timerStr = m.styles.Status.Render("Timer: ") + m.styles.BoolTrue.Render(timeValue) // Timer: 부분은 회색, 시간만 초록색
 	} else {
-		timerStr = "Timer: --:--"
+		timerStr = m.styles.Status.Render("Timer: --:--")
 	}
-	return m.styles.Status.Render(fmt.Sprintf("%s | %s | Undo: u | Main: m", auto, timerStr))
+	
+	separator := m.styles.Status.Render(" | ")
+	undoHint := m.styles.Status.Render("Undo: u")
+	mainHint := m.styles.Status.Render("Main: m")
+	
+	return auto + separator + timerStr + separator + undoHint + separator + mainHint
 }
 
 func allFilled(g game.Grid) bool {

@@ -210,8 +210,8 @@ func (a App) viewMenu() string {
 }
 
 func boolText(s UIStyles, v bool) string {
-	if v { return s.BoolTrue.Render("true") }
-	return s.BoolFalse.Render("false")
+	if v { return s.BoolTrue.Render("ON") }
+	return s.BoolFalse.Render("OFF")
 }
 
 func (a App) viewGame() string {
