@@ -30,6 +30,7 @@ type Model struct {
 	timerEnabled bool
 	startTime    time.Time
 	elapsed      time.Duration
+	completed    bool
 
 	undoStack    []game.Move
 	redoStack    []game.Move
@@ -88,7 +89,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		return m.handleKey(msg)
 	case timerTickMsg:
-		if m.timerEnabled {
+		if m.timerEnabled && !m.completed {
 			m.elapsed = time.Since(m.startTime)
 			return m, tea.Tick(time.Second, func(time.Time) tea.Msg { return timerTickMsg{} })
 		}
@@ -112,7 +113,7 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	}
 	if key.Matches(k, m.keymap.ToggleTimer) {
 		m.timerEnabled = !m.timerEnabled
-		if m.timerEnabled {
+		if m.timerEnabled && !m.completed {
 			m.startTime = time.Now().Add(-m.elapsed)
 			return m, tea.Tick(time.Second, func(time.Time) tea.Msg { return timerTickMsg{} })
 		}
@@ -157,6 +158,9 @@ func (m Model) applyInput(v uint8) (tea.Model, tea.Cmd) {
 	m.undoStack = append(m.undoStack, mv)
 	m.redoStack = nil
 	m.flashes[[2]int{m.cursorRow, m.cursorCol}] = time.Now().Add(120 * time.Millisecond)
+	if isSolved(m.board.Values, m.solution) {
+		m.completed = true
+	}
 	return m, tea.Tick(130*time.Millisecond, func(time.Time) tea.Msg { return flashDoneMsg{Row: mv.Row, Col: mv.Col} })
 }
 
@@ -167,6 +171,7 @@ func (m Model) applyUndo() Model {
 	m.board.Values[last.Row][last.Col] = last.Prev
 	m.redoStack = append(m.redoStack, last)
 	m.cursorRow, m.cursorCol = last.Row, last.Col
+	m.completed = isSolved(m.board.Values, m.solution)
 	return m
 }
 
@@ -177,6 +182,7 @@ func (m Model) applyRedo() Model {
 	m.board.Values[last.Row][last.Col] = last.Next
 	m.undoStack = append(m.undoStack, last)
 	m.cursorRow, m.cursorCol = last.Row, last.Col
+	m.completed = isSolved(m.board.Values, m.solution)
 	return m
 }
 
@@ -187,9 +193,45 @@ func clamp(v, lo, hi int) int {
 }
 
 func (m Model) StatusLine() string {
-	auto := "Auto:Off"
-	if m.autoCheck { auto = "Auto:On" }
-	tm := "Timer:Off"
-	if m.timerEnabled { tm = fmt.Sprintf("Timer:%s", m.elapsed.Truncate(time.Second)) }
-	return m.styles.Status.Render(fmt.Sprintf("%s | %s | Pos %d,%d", auto, tm, m.cursorRow+1, m.cursorCol+1))
+	// Completed UI
+	if m.completed {
+		return gradientText("✭ Clear"+m.elapsed.Truncate(time.Second).String()+"! Tap 'm' to quit ✭", "#7c3aed", "#ec4899")
+	}
+	// All filled but not solved → Try again
+	if allFilled(m.board.Values) && !isSolved(m.board.Values, m.solution) {
+		return m.styles.StatusError.Render("✭ Try again ✭")
+	}
+	// Normal status (fixed width segments)
+	auto := "Auto: OFF"
+	if m.autoCheck { auto = "Auto: ON " } // 화면 너비 고정
+	var timerStr string
+	if m.timerEnabled {
+		secs := int(m.elapsed.Truncate(time.Second).Seconds())
+		mins := (secs / 60) % 100
+		s := secs % 60
+		timerStr = fmt.Sprintf("Timer: %02d:%02d", mins, s)
+	} else {
+		timerStr = "Timer: --:--"
+	}
+	return m.styles.Status.Render(fmt.Sprintf("%s | %s | Undo: u | Main: m", auto, timerStr))
+}
+
+func allFilled(g game.Grid) bool {
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			if g[r][c] == 0 { return false }
+		}
+	}
+	return true
+}
+
+func isSolved(cur game.Grid, sol game.Grid) bool {
+	for r := 0; r < 9; r++ {
+		for c := 0; c < 9; c++ {
+			if cur[r][c] != sol[r][c] {
+				return false
+			}
+		}
+	}
+	return true
 }

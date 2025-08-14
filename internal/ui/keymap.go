@@ -11,6 +11,7 @@ type KeyMap struct {
 	ToggleAuto            key.Binding
 	ToggleTimer           key.Binding
 	Help                  key.Binding
+	MainMenu              key.Binding
 }
 
 func DefaultKeyMap() KeyMap {
@@ -24,6 +25,7 @@ func DefaultKeyMap() KeyMap {
 		ToggleAuto:  key.NewBinding(key.WithKeys("a"), key.WithHelp("a", "Auto-Check/자동 체크")),
 		ToggleTimer: key.NewBinding(key.WithKeys("t"), key.WithHelp("t", "Timer/타이머")),
 		Help:        key.NewBinding(key.WithKeys("?"), key.WithHelp("?", "Help/도움말")),
+		MainMenu:    key.NewBinding(key.WithKeys("m"), key.WithHelp("m", "Main/메인")),
 	}
 }
 
@@ -42,4 +44,5 @@ func (km *KeyMap) ApplyBindings(bindings map[string][]string) {
 	if v, ok := bindings["auto"]; ok { set(&km.ToggleAuto, v, "Auto-Check/자동 체크") }
 	if v, ok := bindings["timer"]; ok { set(&km.ToggleTimer, v, "Timer/타이머") }
 	if v, ok := bindings["help"]; ok { set(&km.Help, v, "Help/도움말") }
+	if v, ok := bindings["main"]; ok { set(&km.MainMenu, v, "Main/메인") }
 }

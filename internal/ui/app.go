@@ -33,6 +33,7 @@ type App struct {
 	width         int
 	height        int
 
+	currentDiff   string
 	game          Model
 }
 
@@ -43,8 +44,8 @@ func NewApp(cfg config.Config) App {
 		cfg:          cfg,
 		th:           th,
 		styles:       BuildStyles(th),
-		menuItems:    []string{"Daily", "Easy", "Normal", "Hard", "Nightmare"},
-		selectedIdx:  2,
+		menuItems:    []string{"Easy", "Normal", "Hard", "Nightmare", "Daily"},
+		selectedIdx:  1,
 		autoCheck:    cfg.AutoCheck,
 		timerEnabled: cfg.TimerEnabled,
 	}
@@ -63,6 +64,10 @@ func (a App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				a.selectedIdx = clamp(a.selectedIdx-1, 0, len(a.menuItems)-1)
 			case "down", "j":
 				a.selectedIdx = clamp(a.selectedIdx+1, 0, len(a.menuItems)-1)
+			case "left", "h":
+				a.selectedIdx = clamp(a.selectedIdx-1, 0, len(a.menuItems)-1)
+			case "right", "l":
+				a.selectedIdx = clamp(a.selectedIdx+1, 0, len(a.menuItems)-1)
 			case "a":
 				a.autoCheck = !a.autoCheck
 			case "t":
@@ -80,10 +85,15 @@ func (a App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		return a, nil
 	case stateGame:
-		gm, cmd := a.game.Update(msg)
-		if v, ok := gm.(Model); ok {
-			a.game = v
+		// intercept main menu key
+		if kmsg, isKey := msg.(tea.KeyMsg); isKey {
+			if kmsg.String() == "m" {
+				a.state = stateMenu
+				return a, nil
+			}
 		}
+		gm, cmd := a.game.Update(msg)
+		if v, ok := gm.(Model); ok { a.game = v }
 		return a, cmd
 	}
 	return a, nil
@@ -119,49 +129,175 @@ func (a *App) startGame() (Model, tea.Cmd) {
 	cfg := a.cfg
 	cfg.AutoCheck = a.autoCheck
 	cfg.TimerEnabled = a.timerEnabled
+	a.currentDiff = sel
 	m := New(g, a.th, cfg)
+	// 구분선 색상을 난이도 타이틀 컬러와 맞춤
+	var hex string
+	switch sel {
+	case "Easy":
+		hex = "#034b69" // cyan
+	case "Normal":
+		hex = "#11682f" // green
+	case "Hard":
+		hex = "#3d2702" // orange (그라데이션 시작색)
+	case "Nightmare":
+		hex = "#3e1d76" // violet (그라데이션 시작색)
+	case "Daily":
+		hex = "#11682f" // green
+	default:
+		hex = a.th.Palette.Accent
+	}
+	style := lipgloss.NewStyle().Foreground(lipgloss.Color(hex))
+	m.styles.RowSep = style
+	m.styles.ColSep = style
 	return m, m.Init()
 }
 
 func (a App) viewMenu() string {
 	banner := `                       __       __      __        
     ____  __  ______  / /______/ /___  / /____  __
-   / __ \/ / / / __ \/ //_/ __  / __ \/ //_/ / / /
-  / /_/ / /_/ / / / / ,< / /_/ / /_/ / ,< / /_/ / 
- / .___/\__,_/_/ /_/_/|_|\__,_/\____/_/|_|\__,_/  
-/_/                            sudoku for punks                  
+   / __ \/ / / / __ \/ // / __  / __ \/ // / / / /
+  / /_/ / /_/ / / / /   </ /_/ / /_/ /   </ /_/ / 
+ /  ___/\____/_/ /_/_/|_|\____/\____/_/|_|\____/ 
+/_/                            sudoku for punks
 `
 
-	left := &strings.Builder{}
-	left.WriteString(a.styles.Banner.Render(banner))
-	left.WriteString("\n")
-	left.WriteString(fmt.Sprintf("Auto-Check: %v  (a)\n", a.autoCheck))
-	left.WriteString(fmt.Sprintf("Timer: %v  (t)\n\n", a.timerEnabled))
-	left.WriteString("Select difficulty (↑/↓, Enter):\n")
-	for i, it := range a.menuItems {
-		item := a.styles.MenuItem.Render(it)
+	// Options
+	optAC := fmt.Sprintf("Auto-Check (a): %s", boolText(a.styles, a.autoCheck))
+	optTM := fmt.Sprintf("Timer (t): %s", boolText(a.styles, a.timerEnabled))
+
+	// Difficulty list (horizontal), Daily last
+	diffs := []string{"Easy", "Normal", "Hard", "Nightmare", "Daily"}
+	var items []string
+	selectedStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#facc15")).Bold(true) // yellow highlight
+	for i, name := range diffs {
+		prefix := "  "
+		if i == a.selectedIdx { prefix = "✭ " }
+		label := prefix + name
 		if i == a.selectedIdx {
-			item = a.styles.MenuItemSelected.Render(it)
-			left.WriteString("> " + item + "\n")
+			items = append(items, selectedStyle.Render(label))
 		} else {
-			left.WriteString("  " + item + "\n")
+			items = append(items, a.styles.MenuItem.Render(label))
 		}
 	}
+	gap := strings.Repeat(" ", 8)
+	diffRow := strings.Join(items, gap)
 
-	panel := a.styles.Panel.Render(left.String())
+	// Gradient title and gradient border box (violet → pink)
+	const leftHex = "#7c3aed"  // violet
+	const rightHex = "#ec4899" // pink
+	title := gradientText("Select difficulty", leftHex, rightHex)
+	box := renderGradientBox(diffRow, 4, leftHex, rightHex)
+
+	// Gradient banner (line by line)
+	var gb strings.Builder
+	for i, l := range strings.Split(strings.TrimRight(banner, "\n"), "\n") {
+		gb.WriteString(gradientText(l, leftHex, rightHex))
+		if i <  len(strings.Split(strings.TrimRight(banner, "\n"), "\n"))-1 { gb.WriteString("\n") }
+	}
+	gradientBanner := gb.String()
+
+	// Compose content with explicit 2-line top/bottom padding
+	content := "\n\n" + gradientBanner + "\n\n\n" + optAC + "\n" + optTM + "\n\n\n" + title + "\n" + box + "\n\n"
+	panel := a.styles.Panel.Render(content)
 	if a.width > 0 && a.height > 0 {
 		return a.styles.App.Render(lipgloss.Place(a.width, a.height, lipgloss.Center, lipgloss.Center, panel))
 	}
 	return a.styles.App.Render(panel)
+}
+
+func boolText(s UIStyles, v bool) string {
+	if v { return s.BoolTrue.Render("true") }
+	return s.BoolFalse.Render("false")
 }
 
 func (a App) viewGame() string {
-	content := a.game.View()
-	innerWidth := lipgloss.Width(content) + 4
-	centered := lipgloss.PlaceHorizontal(innerWidth, lipgloss.Center, content)
-	panel := a.styles.Panel.Render(centered)
+	// 고정 폭 사용 (스도쿠 보드는 항상 동일한 크기)
+	innerWidth := 50
+	
+	boardAndStatus := Render(a.game)
+
+	label := a.currentDiff
+	if a.currentDiff == "Daily" { label = "Daily Seed" }
+	headerText := label + " Mode"
+	var header string
+	switch a.currentDiff {
+	case "Easy":
+		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#06b6d4")).Bold(true).Render(headerText)
+	case "Normal":
+		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#22c55e")).Bold(true).Render(headerText)
+	case "Hard":
+		header = gradientText(headerText, "#f59e0b", "#ef4444")
+	case "Nightmare":
+		header = gradientText(headerText, "#7c3aed", "#ec4899")
+	case "Daily":
+		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#22c55e")).Bold(true).Render(headerText)
+	default:
+		header = lipgloss.NewStyle().Foreground(lipgloss.Color(a.th.Palette.Accent)).Bold(true).Render(headerText)
+	}
+
+	headerCentered := lipgloss.PlaceHorizontal(innerWidth, lipgloss.Center, header)
+	centered := lipgloss.PlaceHorizontal(innerWidth, lipgloss.Center, boardAndStatus)
+	// 간격: 상단 1줄 + 헤더 + 1줄(빈 줄 보이도록 개행 2개) + 보드(내부 보드-상태 2줄) + 하단 1줄
+	body := "\n" + headerCentered + "\n\n" + centered + "\n"
+	panel := a.styles.Panel.Render(body)
 	if a.width > 0 && a.height > 0 {
 		return a.styles.App.Render(lipgloss.Place(a.width, a.height, lipgloss.Center, lipgloss.Center, panel))
 	}
 	return a.styles.App.Render(panel)
 }
+
+// Helpers: gradient text and gradient bordered box
+func renderGradientBox(content string, padX int, leftHex, rightHex string) string {
+	w := lipgloss.Width(content) + padX*2
+	top := lipgloss.NewStyle().Foreground(lipgloss.Color(leftHex)).Render("╭") + gradientLine("─", w, leftHex, rightHex) + lipgloss.NewStyle().Foreground(lipgloss.Color(rightHex)).Render("╮")
+	bottom := lipgloss.NewStyle().Foreground(lipgloss.Color(leftHex)).Render("╰") + gradientLine("─", w, leftHex, rightHex) + lipgloss.NewStyle().Foreground(lipgloss.Color(rightHex)).Render("╯")
+	left := lipgloss.NewStyle().Foreground(lipgloss.Color(leftHex)).Render("│")
+	right := lipgloss.NewStyle().Foreground(lipgloss.Color(rightHex)).Render("│")
+	middle := left + strings.Repeat(" ", padX) + content + strings.Repeat(" ", padX) + right
+	return strings.Join([]string{top, middle, bottom}, "\n")
+}
+
+func gradientLine(ch string, width int, fromHex, toHex string) string {
+	colors := gradientColors(fromHex, toHex, width)
+	var b strings.Builder
+	for i := 0; i < width; i++ {
+		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(colors[i])).Render(ch))
+	}
+	return b.String()
+}
+
+func gradientText(text, leftHex, rightHex string) string {
+	colors := gradientColors(leftHex, rightHex, len(text))
+	var b strings.Builder
+	idx := 0
+	for _, ch := range text { // rune-safe
+		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(colors[idx])).Bold(true).Render(string(ch)))
+		idx++
+	}
+	return b.String()
+}
+
+func gradientColors(fromHex, toHex string, steps int) []string {
+	r1, g1, b1 := hexToRGB(fromHex)
+	r2, g2, b2 := hexToRGB(toHex)
+	out := make([]string, steps)
+	for i := 0; i < steps; i++ {
+		if steps == 1 { out[i] = fromHex; continue }
+		t := float64(i) / float64(steps-1)
+		r := int(float64(r1) + (float64(r2)-float64(r1))*t)
+		g := int(float64(g1) + (float64(g2)-float64(g1))*t)
+		b := int(float64(b1) + (float64(b2)-float64(b1))*t)
+		out[i] = fmt.Sprintf("#%02x%02x%02x", r, g, b)
+	}
+	return out
+}
+
+func hexToRGB(hex string) (int, int, int) {
+	h := strings.TrimPrefix(hex, "#")
+	if len(h) != 6 { return 255, 255, 255 }
+	var r, g, b int
+	fmt.Sscanf(h, "%02x%02x%02x", &r, &g, &b)
+	return r, g, b
+}
+

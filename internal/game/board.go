@@ -115,16 +115,14 @@ func DuplicateMapAll(g Grid) [9][9]bool {
 	return dup
 }
 
-// ConflictMap marks cells that differ from the solved grid (excluding givens) when auto-check is on.
-func ConflictMap(values Grid, solution Grid, given [9][9]bool) [9][9]bool {
+// ConflictMap marks cells that violate Sudoku constraints (duplicates), excluding givens.
+func ConflictMap(values Grid, given [9][9]bool) [9][9]bool {
+	all := DuplicateMapAll(values)
 	var bad [9][9]bool
 	for r := 0; r < 9; r++ {
 		for c := 0; c < 9; c++ {
 			if given[r][c] { continue }
-			v := values[r][c]
-			if v != 0 && solution[r][c] != 0 && v != solution[r][c] {
-				bad[r][c] = true
-			}
+			bad[r][c] = all[r][c]
 		}
 	}
 	return bad
