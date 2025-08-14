@@ -1,10 +1,10 @@
-## pundoku
+## punkdoku
 
 ### 개요
-`pundoku`는 macOS, Linux, Windows에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
+`punkdoku`는 macOS, Linux, Windows에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
 
 ### Overview
-`pundoku` is a cross‑platform terminal Sudoku for macOS, Linux, and Windows. It’s written in Go, built on Bubble Tea and Lipgloss for a clean, responsive TUI. Puzzles are generated per difficulty with a focus on uniqueness and reproducibility; Daily mode uses a UTC date‑based seed so everyone plays the same grid. The game ships with input flashes, undo/redo, auto‑check, and a compact timer.
+`punkdoku` is a cross‑platform terminal Sudoku for macOS, Linux, and Windows. It’s written in Go, built on Bubble Tea and Lipgloss for a clean, responsive TUI. Puzzles are generated per difficulty with a focus on uniqueness and reproducibility; Daily mode uses a UTC date‑based seed so everyone plays the same grid. The game ships with input flashes, undo/redo, auto‑check, and a compact timer.
 
 ## Features
 - **Cross‑platform TUI**: Runs the same on macOS, Linux, and Windows terminals.
@@ -23,17 +23,17 @@ Replace `YOUR_ORG` with your GitHub org or username.
 
 - macOS (arm64):
 ```bash
-sudo curl -L https://github.com/YOUR_ORG/pundoku/releases/latest/download/pundoku-macos -o /usr/local/bin/pundoku && sudo chmod +x /usr/local/bin/pundoku && pundoku
+sudo curl -L https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku && sudo chmod +x /usr/local/bin/punkdoku && punkdoku
 ```
 
 - Linux (x86_64):
 ```bash
-sudo curl -L https://github.com/YOUR_ORG/pundoku/releases/latest/download/pundoku-linux -o /usr/local/bin/pundoku && sudo chmod +x /usr/local/bin/pundoku && pundoku
+sudo curl -L https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku && sudo chmod +x /usr/local/bin/punkdoku && punkdoku
 ```
 
 - Windows (PowerShell):
 ```powershell
-iwr -useb https://github.com/YOUR_ORG/pundoku/releases/latest/download/pundoku-windows.exe -OutFile $env:USERPROFILE\pundoku.exe; & $env:USERPROFILE\pundoku.exe
+iwr -useb https://github.com/YOUR_ORG/punkdoku/releases/latest/download/punkdoku-windows.exe -OutFile $env:USERPROFILE\punkdoku.exe; & $env:USERPROFILE\punkdoku.exe
 ```
 
 ### Build from source
@@ -43,8 +43,8 @@ Prerequisites:
 Commands:
 ```bash
 go mod tidy
-CGO_ENABLED=0 go build -ldflags "-s -w" -o pundoku ./cmd/punkdoku
-./pundoku
+CGO_ENABLED=0 go build -ldflags "-s -w" -o punkdoku ./cmd/punkdoku
+./punkdoku
 ```
 
 Run without building:
@@ -55,20 +55,20 @@ go run ./cmd/punkdoku
 ### Cross‑compiling examples
 ```bash
 # macOS (arm64)
-CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/pundoku-macos ./cmd/punkdoku
+CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/punkdoku-macos ./cmd/punkdoku
 
 # Linux (x86_64)
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/pundoku-linux ./cmd/punkdoku
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-linux ./cmd/punkdoku
 
 # Windows (x86_64)
-CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/pundoku-windows.exe ./cmd/punkdoku
+CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-windows.exe ./cmd/punkdoku
 ```
 
 > Tip: Publish the three files in `dist/` as GitHub Release assets to enable the one‑line installs above.
 
 ## Usage
 
-Launch `pundoku` and pick a difficulty from the menu. The game view shows `{Difficulty} Mode`, the board, and a status line. With Auto‑Check enabled, conflicts are highlighted immediately. When solved, the status line changes to a clear message; if the timer is off, no time is shown.
+Launch `punkdoku` and pick a difficulty from the menu. The game view shows `{Difficulty} Mode`, the board, and a status line. With Auto‑Check enabled, conflicts are highlighted immediately. When solved, the status line changes to a clear message; if the timer is off, no time is shown.
 
 ## Configuration
 
@@ -123,7 +123,7 @@ internal/
 
 ## Development
 - Run: `go run ./cmd/punkdoku`
-- Build: `CGO_ENABLED=0 go build -ldflags "-s -w" -o pundoku ./cmd/punkdoku`
+- Build: `CGO_ENABLED=0 go build -ldflags "-s -w" -o punkdoku ./cmd/punkdoku`
 - Lint/build with your usual Go toolchain. The code favors clarity and explicit naming.
 
 
