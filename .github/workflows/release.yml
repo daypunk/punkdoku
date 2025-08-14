@@ -49,7 +49,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            dist/punkdoku-macos
+            dist/punkdoku-macos-arm64
+            dist/punkdoku-macos-amd64
             dist/punkdoku-linux
             dist/punkdoku-windows.exe
             dist/SHA256SUMS.txt
@@ -60,3 +61,11 @@ jobs:
           name: Release ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Homebrew Tap
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          repository: daypunk/homebrew-tap
+          event-type: punkdoku-updated
+          client-payload: '{"version": "${{ github.ref_name }}", "tag": "${{ github.ref_name }}"}'
