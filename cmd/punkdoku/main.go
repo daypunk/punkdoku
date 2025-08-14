@@ -13,7 +13,7 @@ import (
 func main() {
 	// Legacy flags kept but ignored when menu is used
 	_ = flag.Bool("daily", false, "Generate daily puzzle")
-	_ = flag.String("difficulty", "normal", "Difficulty: easy|normal|hard|nightmare")
+	_ = flag.String("difficulty", "normal", "Difficulty: easy|normal|hard|lunatic")
 	flag.Parse()
 
 	cfg, _ := config.Load()

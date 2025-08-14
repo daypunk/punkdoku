@@ -7,7 +7,7 @@ import (
 
 // ExampleRenderSample returns a sample rendering string for docs/tests.
 func ExampleRenderSample() string {
-	th := theme.Dark()
+	th := theme.Punk()
 	styles := BuildStyles(th)
 	var b strings.Builder
 	b.WriteString(styles.CellSelected.Render("5"))

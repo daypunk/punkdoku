@@ -8,12 +8,12 @@
 
 ## Features
 - **Cross‑platform TUI**: Runs the same on macOS, Linux, and Windows terminals.
-- **Difficulty presets**: Easy, Normal, Hard, Nightmare, and Daily.
+- **Difficulty presets**: Easy, Normal, Hard, Lunatic, and Daily.
 - **Reproducible Daily**: UTC `YYYY‑MM‑DD` seeded generation.
 - **Single‑solution focus**: Generator removes cells with a uniqueness check.
 - **Auto‑Check toggle** and **Undo/Redo**.
 - **Compact timer** with fixed‑width `MM:SS` to avoid UI jitter.
-- **Modern look**: Box‑drawing grid, rounded frame, cyan accent; block separators match difficulty color (gradients for Hard/Nightmare).
+- **Modern look**: Box‑drawing grid, rounded frame, cyan accent; block separators match difficulty color (gradients for Hard/Lunatic).
 - **Single binary**: distribute as a single executable per OS.
 
 ## Installation
@@ -51,7 +51,7 @@ punkdoku
 - **Easy**: ~38 cells removed, suitable for beginners
 - **Normal**: ~46 cells removed, balanced challenge
 - **Hard**: ~52 cells removed, requires strategy
-- **Nightmare**: ~58 cells removed, expert level
+- **Lunatic**: ~58 cells removed, expert level
 - **Daily**: Same puzzle for everyone based on UTC date
 
 ### Game Controls
@@ -95,7 +95,7 @@ User settings are stored at `~/.punkdoku/config.yaml` (auto‑check and timer). 
   - Easy: remove ~38 cells, ~150ms timeout
   - Normal: remove ~46 cells, ~150ms timeout
   - Hard: remove ~52 cells, ~200ms timeout
-  - Nightmare: remove ~58 cells, ~250ms timeout
+  - Lunatic: remove ~58 cells, ~250ms timeout
 - Uniqueness: after each removal, check with the solver (`CountSolutions`) and skip removals that break uniqueness (stop after 2 solutions for speed).
 - Seeding: Daily mode uses `UTC YYYY‑MM‑DD`, hashed via 64‑bit FNV‑1a to seed `math/rand` for reproducibility.
 - Performance: bounded by timeouts to avoid pathological search; puzzles aim to generate within a few hundred milliseconds.
@@ -107,7 +107,7 @@ User settings are stored at `~/.punkdoku/config.yaml` (auto‑check and timer). 
 ### UI Architecture
 - Bubble Tea model: `Model` manages board state, timer, auto‑check, input flashes, and history.
 - Lipgloss styles: centralized in `internal/ui/styles.go` and `internal/theme/theme.go` for consistent colors.
-- The grid uses Unicode box‑drawing characters with rounded outer corners. 3×3 separators share the difficulty color; Hard and Nightmare use a gradient.
+- The grid uses Unicode box‑drawing characters with rounded outer corners. 3×3 separators share the difficulty color; Hard and Lunatic use a gradient.
 - The timer and status fields are formatted with fixed widths to avoid horizontal jitter; the game panel is centered.
 
 ### Layout Stability

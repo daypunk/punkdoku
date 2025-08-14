@@ -195,7 +195,10 @@ func clamp(v, lo, hi int) int {
 func (m Model) StatusLine() string {
 	// Completed UI
 	if m.completed {
-		return gradientText("✭ Clear"+m.elapsed.Truncate(time.Second).String()+"! Tap 'm' to quit ✭", "#7c3aed", "#ec4899")
+		adaptiveColors := theme.NewAdaptiveColors(m.theme)
+		gradientColors := adaptiveColors.GetGradientColors()
+		completeGrad := gradientColors["complete"]
+		return gradientText("✭ Clear"+m.elapsed.Truncate(time.Second).String()+"! Tap 'm' to quit ✭", completeGrad[0], completeGrad[1])
 	}
 	// All filled but not solved → Try again
 	if allFilled(m.board.Values) && !isSolved(m.board.Values, m.solution) {

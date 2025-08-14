@@ -12,7 +12,7 @@ const (
 	Easy Difficulty = iota
 	Normal
 	Hard
-	Nightmare
+	Lunatic
 )
 
 // DailySeed returns a stable seed based on UTC date (YYYY-MM-DD).
@@ -38,7 +38,7 @@ func paramsFor(d Difficulty) Params {
 		return Params{RemovedCells: 46, Timeout: 150 * time.Millisecond}
 	case Hard:
 		return Params{RemovedCells: 52, Timeout: 200 * time.Millisecond}
-	case Nightmare:
+	case Lunatic:
 		return Params{RemovedCells: 58, Timeout: 250 * time.Millisecond}
 	default:
 		return Params{RemovedCells: 46, Timeout: 150 * time.Millisecond}

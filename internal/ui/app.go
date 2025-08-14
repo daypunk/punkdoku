@@ -41,13 +41,13 @@ type App struct {
 }
 
 func NewApp(cfg config.Config) App {
-	th := theme.Punk()
+	th := theme.DetectTheme()
 	return App{
 		state:        stateMenu,
 		cfg:          cfg,
 		th:           th,
 		styles:       BuildStyles(th),
-		menuItems:    []string{"Easy", "Normal", "Hard", "Nightmare", "Daily"},
+		menuItems:    []string{"Easy", "Normal", "Hard", "Lunatic", "Daily"},
 		selectedIdx:  1,
 		autoCheck:    cfg.AutoCheck,
 		timerEnabled: cfg.TimerEnabled,
@@ -125,8 +125,8 @@ func (a *App) startGame() (Model, tea.Cmd) {
 		g, err = generator.Generate(generator.Normal, "")
 	case "Hard":
 		g, err = generator.Generate(generator.Hard, "")
-	case "Nightmare":
-		g, err = generator.Generate(generator.Nightmare, "")
+	case "Lunatic":
+		g, err = generator.Generate(generator.Lunatic, "")
 	}
 	if err != nil { return a.game, nil }
 	cfg := a.cfg
@@ -134,25 +134,18 @@ func (a *App) startGame() (Model, tea.Cmd) {
 	cfg.TimerEnabled = a.timerEnabled
 	a.currentDiff = sel
 	m := New(g, a.th, cfg)
-	// 구분선 색상을 난이도 타이틀 컬러와 맞춤
-	var hex string
-	switch sel {
-	case "Easy":
-		hex = "#034b69" // cyan
-	case "Normal":
-		hex = "#11682f" // green
-	case "Hard":
-		hex = "#3d2702" // orange (그라데이션 시작색)
-	case "Nightmare":
-		hex = "#3e1d76" // violet (그라데이션 시작색)
-	case "Daily":
-		hex = "#11682f" // green
-	default:
+	// 적응형 색상 사용
+	adaptiveColors := theme.NewAdaptiveColors(a.th)
+	diffColors := adaptiveColors.GetDifficultyColors()
+	hex := diffColors[sel]
+	if hex == "" {
 		hex = a.th.Palette.Accent
 	}
 	style := lipgloss.NewStyle().Foreground(lipgloss.Color(hex))
 	m.styles.RowSep = style
 	m.styles.ColSep = style
+	// Fixed 숫자도 구분선과 동일한 색상 사용
+	m.styles.CellFixed = m.styles.CellFixed.Foreground(lipgloss.Color(hex))
 	return m, m.Init()
 }
 
@@ -169,10 +162,14 @@ func (a App) viewMenu() string {
 	optAC := fmt.Sprintf("Auto-Check (a): %s", boolText(a.styles, a.autoCheck))
 	optTM := fmt.Sprintf("Timer (t): %s", boolText(a.styles, a.timerEnabled))
 
+	// Adaptive colors
+	adaptiveColors := theme.NewAdaptiveColors(a.th)
+	accentColors := adaptiveColors.GetAccentColors()
+	
 	// Difficulty list (horizontal), Daily last
-	diffs := []string{"Easy", "Normal", "Hard", "Nightmare", "Daily"}
+	diffs := []string{"Easy", "Normal", "Hard", "Lunatic", "Daily"}
 	var items []string
-	selectedStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#facc15")).Bold(true) // yellow highlight
+	selectedStyle := lipgloss.NewStyle().Foreground(lipgloss.Color(accentColors["selected"])).Bold(true)
 	for i, name := range diffs {
 		prefix := "  "
 		if i == a.selectedIdx { prefix = "✭ " }
@@ -183,14 +180,17 @@ func (a App) viewMenu() string {
 			items = append(items, a.styles.MenuItem.Render(label))
 		}
 	}
-	gap := strings.Repeat(" ", 8)
+	gap := strings.Repeat(" ", 4)
 	diffRow := strings.Join(items, gap)
 
-	// Gradient title and gradient border box (violet → pink)
-	const leftHex = "#7c3aed"  // violet
-	const rightHex = "#ec4899" // pink
+	// Adaptive gradient colors
+	gradientColors := adaptiveColors.GetGradientColors()
+	bannerGrad := gradientColors["banner"]
+	leftHex := bannerGrad[0]
+	rightHex := bannerGrad[1]
+	
 	title := gradientText("Select difficulty", leftHex, rightHex)
-	box := renderGradientBox(diffRow, 4, leftHex, rightHex)
+	box := renderGradientBox(diffRow, 2, leftHex, rightHex)  // 4에서 2로 줄임
 
 	// Gradient banner (line by line)
 	var gb strings.Builder
@@ -223,18 +223,27 @@ func (a App) viewGame() string {
 	label := a.currentDiff
 	if a.currentDiff == "Daily" { label = "Daily Seed" }
 	headerText := label + " Mode"
+	// Adaptive colors for headers
+	adaptiveColors := theme.NewAdaptiveColors(a.th)
+	gradientColors := adaptiveColors.GetGradientColors()
+	
 	var header string
 	switch a.currentDiff {
 	case "Easy":
-		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#06b6d4")).Bold(true).Render(headerText)
+		easyGrad := gradientColors["easy"]
+		header = gradientText(headerText, easyGrad[0], easyGrad[1])
 	case "Normal":
-		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#22c55e")).Bold(true).Render(headerText)
+		normalGrad := gradientColors["normal"]
+		header = gradientText(headerText, normalGrad[0], normalGrad[1])
 	case "Hard":
-		header = gradientText(headerText, "#f59e0b", "#ef4444")
-	case "Nightmare":
-		header = gradientText(headerText, "#7c3aed", "#ec4899")
+		hardGrad := gradientColors["hard"]
+		header = gradientText(headerText, hardGrad[0], hardGrad[1])
+	case "Lunatic":
+		lunaticGrad := gradientColors["lunatic"]
+		header = gradientText(headerText, lunaticGrad[0], lunaticGrad[1])
 	case "Daily":
-		header = lipgloss.NewStyle().Foreground(lipgloss.Color("#22c55e")).Bold(true).Render(headerText)
+		dailyGrad := gradientColors["daily"]
+		header = gradientText(headerText, dailyGrad[0], dailyGrad[1])
 	default:
 		header = lipgloss.NewStyle().Foreground(lipgloss.Color(a.th.Palette.Accent)).Bold(true).Render(headerText)
 	}
