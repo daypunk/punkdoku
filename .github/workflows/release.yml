@@ -25,20 +25,17 @@ jobs:
         run: |
           mkdir -p dist
           
+          # Linux (native)
+          CGO_ENABLED=0 go build -ldflags "-s -w" -o dist/punkdoku-linux ./cmd/punkdoku
+          
+          # Windows
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-windows.exe ./cmd/punkdoku
+          
           # macOS (arm64)
           CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -ldflags "-s -w" -o dist/punkdoku-macos-arm64 ./cmd/punkdoku
           
           # macOS (amd64)
           CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-macos-amd64 ./cmd/punkdoku
-          
-          # Create universal macOS binary
-          lipo -create -output dist/punkdoku-macos dist/punkdoku-macos-arm64 dist/punkdoku-macos-amd64
-          
-          # Linux
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-linux ./cmd/punkdoku
-          
-          # Windows
-          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o dist/punkdoku-windows.exe ./cmd/punkdoku
           
           # Generate checksums
           shasum -a 256 dist/punkdoku-* > dist/SHA256SUMS.txt
