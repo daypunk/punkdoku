@@ -37,7 +37,7 @@ func BuildStyles(t theme.Theme) UIStyles {
 	red := lipgloss.Color("#ef4444")
 	return UIStyles{
 		App:              lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
-		Panel:            lipgloss.NewStyle().Padding(0, 4).Margin(1, 4).Border(lipgloss.RoundedBorder()).BorderForeground(gridColor),
+		Panel:            lipgloss.NewStyle().Padding(0, 4).Margin(1, 4).Border(lipgloss.RoundedBorder()).BorderForeground(lipgloss.Color("#374151")),
 		Banner:           lipgloss.NewStyle().Foreground(accent).Bold(true),
 		MenuItem:         lipgloss.NewStyle().Foreground(lipgloss.Color(t.Palette.Foreground)),
 		MenuItemSelected: lipgloss.NewStyle().Foreground(accent).Bold(true),
