@@ -198,11 +198,21 @@ func (m Model) StatusLine() string {
 		adaptiveColors := theme.NewAdaptiveColors(m.theme)
 		gradientColors := adaptiveColors.GetGradientColors()
 		completeGrad := gradientColors["complete"]
-		return gradientText("✭ Clear"+m.elapsed.Truncate(time.Second).String()+"! Tap 'm' to quit ✭", completeGrad[0], completeGrad[1])
+		var completeText string
+		if m.timerEnabled {
+			secs := int(m.elapsed.Truncate(time.Second).Seconds())
+			mins := (secs / 60) % 100
+			s := secs % 60
+			timeStr := fmt.Sprintf("%02d:%02d", mins, s)
+			completeText = fmt.Sprintf("✭ Clear %s ! Tap 'm' to quit ✭", timeStr)
+		} else {
+			completeText = "✭ Clear! Tap 'm' to quit ✭"
+		}
+		return gradientText(completeText, completeGrad[0], completeGrad[1])
 	}
 	// All filled but not solved → Try again
 	if allFilled(m.board.Values) && !isSolved(m.board.Values, m.solution) {
-		return m.styles.StatusError.Render("✭ Try again ✭")
+		return m.styles.StatusError.Render("✭ Try again... ✭")
 	}
 	// Normal status (fixed width segments)
 	var auto string
