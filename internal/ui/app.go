@@ -216,7 +216,7 @@ func boolText(s UIStyles, v bool) string {
 
 func (a App) viewGame() string {
 	// 고정 폭 사용 (스도쿠 보드는 항상 동일한 크기)
-	innerWidth := 50
+	innerWidth := 58  // 메인화면과 너비 맞춤
 	
 	boardAndStatus := Render(a.game)
 
