@@ -82,17 +82,6 @@ chmod +x /usr/local/bin/punkdoku
 # chmod +x /usr/local/bin/punkdoku
 ```
 
-#### Windows
-```bash
-# Run in PowerShell
-# Using curl (recommended)
-curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-windows.exe -o C:\Windows\System32\punkdoku.exe
-
-# If curl is not available, download manually from browser
-# 1. Download punkdoku-windows.exe from https://github.com/daypunk/punkdoku/releases/latest
-# 2. Copy to C:\Windows\System32\ folder
-```
-
 ### 🚀 Running the Game
 After installation, run the game from the **terminal** using:
 
