@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-brightgreen?style=for-the-badge&logo=terminal&labelColor=2d3748" alt="Platforms"/>
+  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen?style=for-the-badge&logo=terminal&labelColor=2d3748" alt="Platforms"/>
   <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=for-the-badge&logo=bubbletea&labelColor=2d3748" alt="TUI Framework"/>
   <img src="https://img.shields.io/github/repo-size/daypunk/punkdoku?style=for-the-badge&logo=github&color=yellow&labelColor=2d3748" alt="Repo Size"/>
 </p>
