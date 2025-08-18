@@ -17,7 +17,8 @@
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat" alt="License"/>
   </a>
-  
+</p>
+<p align="center">
   <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen?style=flat&logo=terminal" alt="Platforms"/>
   <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=flat" alt="TUI Framework"/>
   <img src="https://img.shields.io/badge/Binary%20Size-4.8MB-blue?style=flat" alt="Binary Size"/>
@@ -30,7 +31,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/🧩-Sudoku-purple?style=flat" alt="Sudoku"/>
   <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-purple?style=flat" alt="Daily Seed Puzzles"/>
-  <img src="https://img.shields.io/badge/🖥️-Selectable%20Difficulties-purple?style=flat" alt="Selectable Difficulties"/>
 </p>
 
 ### 개요
