@@ -6,27 +6,29 @@
 
 <p align="center">
   <a href="https://github.com/daypunk/punkdoku/releases/latest">
-    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=for-the-badge&logo=github&color=ff6b6b&labelColor=2d3748" alt="Latest Release"/>
+    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=flat&logo=github&color=ff6b6b" alt="Latest Release"/>
   </a>
   <a href="https://github.com/daypunk/punkdoku/releases">
-    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=for-the-badge&logo=download&color=4ecdc4&labelColor=2d3748" alt="Downloads"/>
+    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=flat&logo=download&color=4ecdc4" alt="Downloads"/>
   </a>
   <a href="https://golang.org/">
-    <img src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=2d3748" alt="Go Version"/>
+    <img src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go&logoColor=white" alt="Go Version"/>
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat" alt="License"/>
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen?style=for-the-badge&logo=terminal&labelColor=2d3748" alt="Platforms"/>
-  <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=for-the-badge&logo=bubbletea&labelColor=2d3748" alt="TUI Framework"/>
-  <img src="https://img.shields.io/github/repo-size/daypunk/punkdoku?style=for-the-badge&logo=github&color=yellow&labelColor=2d3748" alt="Repo Size"/>
+  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen?style=flat&logo=terminal" alt="Platforms"/>
+  <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=flat" alt="TUI Framework"/>
+  <img src="https://img.shields.io/badge/Binary%20Size-4.8MB-blue?style=flat" alt="Binary Size"/>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/🧩-Sudoku%20Solver-purple?style=for-the-badge&labelColor=2d3748" alt="Sudoku"/>
-  <img src="https://img.shields.io/badge/⚡-Terminal%20Game-orange?style=for-the-badge&labelColor=2d3748" alt="Terminal Game"/>
-  <img src="https://img.shields.io/badge/🎮-Daily%20Puzzles-blue?style=for-the-badge&labelColor=2d3748" alt="Daily Puzzles"/>
-  <img src="https://img.shields.io/badge/🏆-Four%20Difficulties-red?style=for-the-badge&labelColor=2d3748" alt="Difficulties"/>
+  <img src="https://img.shields.io/badge/🧩-Sudoku-purple?style=flat" alt="Sudoku"/>
+  <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-purple?style=flat" alt="Daily Seed Puzzles"/>
+  <img src="https://img.shields.io/badge/🖥️-Selectable%20Difficulties-purple?style=flat" alt="Selectable Difficulties"/>
 </p>
 
 ### 개요
