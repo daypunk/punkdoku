@@ -167,3 +167,5 @@ go build -o punkdoku ./cmd/punkdoku
 ```
 
 Built for modern terminals with Unicode support. Works best with monospace fonts and true color support.
+
+This project is licensed under the MIT License. Please credit the original source when reusing.
