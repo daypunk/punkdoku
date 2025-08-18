@@ -1,5 +1,5 @@
 ## punkdoku
-
+![Image](https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661)
 ### 개요
 `punkdoku`는 macOS, Linux에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
 
