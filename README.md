@@ -1,6 +1,8 @@
 ## punkdoku
 
-<img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="500" alt="punkdoku">
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="500" alt="punkdoku">
+</p>
 
 <p align="center">
   <a href="https://github.com/daypunk/punkdoku/releases/latest">
