@@ -37,21 +37,65 @@
 
 ## Installation
 
-### Homebrew (Recommended)
+punkdoku is a **terminal application**. After installation, run it from the terminal using the `punkdoku` command.
+
+### 🍺 Homebrew (macOS/Linux - Recommended)
+The easiest installation method.
+
 ```bash
+# Install Homebrew first, if you don't have it!
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install punkdoku
 brew install daypunk/tap/punkdoku
 ```
 
-### Direct Download
-```bash
-# macOS
-curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku && chmod +x /usr/local/bin/punkdoku
+### 📥 Direct Download (All Platforms)
 
-# Linux
-curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku && chmod +x /usr/local/bin/punkdoku
+#### macOS
+```bash
+# Using curl (recommended)
+curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku
+chmod +x /usr/local/bin/punkdoku
+
+# If curl is not available, download manually from browser
+# 1. Download punkdoku-macos from https://github.com/daypunk/punkdoku/releases/latest
+# 2. Run these commands in terminal:
+# mv ~/Downloads/punkdoku-macos /usr/local/bin/punkdoku
+# chmod +x /usr/local/bin/punkdoku
 ```
 
-### Run
+#### Linux
+```bash
+# Using curl (recommended)
+curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku
+chmod +x /usr/local/bin/punkdoku
+
+# If curl is not available, use wget
+wget -O /usr/local/bin/punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux
+chmod +x /usr/local/bin/punkdoku
+
+# If neither is available, download manually from browser
+# 1. Download punkdoku-linux from https://github.com/daypunk/punkdoku/releases/latest
+# 2. Run these commands in terminal:
+# mv ~/Downloads/punkdoku-linux /usr/local/bin/punkdoku
+# chmod +x /usr/local/bin/punkdoku
+```
+
+#### Windows
+```bash
+# Run in PowerShell
+# Using curl (recommended)
+curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-windows.exe -o C:\Windows\System32\punkdoku.exe
+
+# If curl is not available, download manually from browser
+# 1. Download punkdoku-windows.exe from https://github.com/daypunk/punkdoku/releases/latest
+# 2. Copy to C:\Windows\System32\ folder
+```
+
+### 🚀 Running the Game
+After installation, run the game from the **terminal** using:
+
 ```bash
 punkdoku
 ```
