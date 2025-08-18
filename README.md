@@ -2,6 +2,31 @@
 
 <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="500" alt="punkdoku">
 
+<p align="center">
+  <a href="https://github.com/daypunk/punkdoku/releases/latest">
+    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=for-the-badge&logo=github&color=ff6b6b&labelColor=2d3748" alt="Latest Release"/>
+  </a>
+  <a href="https://github.com/daypunk/punkdoku/releases">
+    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=for-the-badge&logo=download&color=4ecdc4&labelColor=2d3748" alt="Downloads"/>
+  </a>
+  <a href="https://golang.org/">
+    <img src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=for-the-badge&logo=go&logoColor=white&labelColor=2d3748" alt="Go Version"/>
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux%20%7C%20Windows-brightgreen?style=for-the-badge&logo=terminal&labelColor=2d3748" alt="Platforms"/>
+  <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=for-the-badge&logo=bubbletea&labelColor=2d3748" alt="TUI Framework"/>
+  <img src="https://img.shields.io/github/repo-size/daypunk/punkdoku?style=for-the-badge&logo=github&color=yellow&labelColor=2d3748" alt="Repo Size"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/🧩-Sudoku%20Solver-purple?style=for-the-badge&labelColor=2d3748" alt="Sudoku"/>
+  <img src="https://img.shields.io/badge/⚡-Terminal%20Game-orange?style=for-the-badge&labelColor=2d3748" alt="Terminal Game"/>
+  <img src="https://img.shields.io/badge/🎮-Daily%20Puzzles-blue?style=for-the-badge&labelColor=2d3748" alt="Daily Puzzles"/>
+  <img src="https://img.shields.io/badge/🏆-Four%20Difficulties-red?style=for-the-badge&labelColor=2d3748" alt="Difficulties"/>
+</p>
+
 ### 개요
 `punkdoku`는 macOS, Linux에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
 
