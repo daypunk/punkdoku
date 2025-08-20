@@ -1,4 +1,4 @@
-## punkdoku
+# punkdoku
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="600" alt="punkdoku">
@@ -25,9 +25,8 @@
 </p><br>
 
 <div align="center">
-  <img width="600" height="146" alt="Image" src="https://github.com/user-attachments/assets/304f1911-3ec1-4311-9892-e7c5fb0d6f89" />
+  <img width="600" alt="Image" src="https://github.com/user-attachments/assets/304f1911-3ec1-4311-9892-e7c5fb0d6f89" />
 </div>
-
 
 <p align="center">
   <img src="https://img.shields.io/badge/🧩-Sudoku-purple?style=flat" alt="Sudoku"/>
@@ -40,51 +39,41 @@
 ### Overview
 `punkdoku` is a cross‑platform terminal Sudoku for macOS and Linux. It's written in Go, built on Bubble Tea and Lipgloss for a clean, responsive TUI. Puzzles are generated per difficulty with a focus on uniqueness and reproducibility; Daily mode uses a UTC date‑based seed so everyone plays the same grid. The game ships with input flashes, undo/redo, auto‑check, and a compact timer.
 
-## Installation
+## Quick Start
 
-punkdoku is a **terminal application**. After installation, run it from the terminal using the `punkdoku` command.
-
-### 🍺 Homebrew (macOS/Linux - Recommended)
-The easiest installation method.
-
+### Option 1: Homebrew (Recommended)
 ```bash
-# Install Homebrew first, if you don't have it!
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install punkdoku
 brew install daypunk/tap/punkdoku
 ```
 
-### 📥 Direct Download (All Platforms)
+### Option 2: Manual Download
 
 #### macOS
 ```bash
-# Using curl (recommended)
-curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos -o /usr/local/bin/punkdoku
-chmod +x /usr/local/bin/punkdoku
+# Download the binary (choose based on your Mac's processor)
+# For Intel Macs:
+curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos-amd64
 
-# If curl is not available, download manually from browser
-# 1. Download punkdoku-macos from https://github.com/daypunk/punkdoku/releases/latest
-# 2. Run these commands in terminal:
-# mv ~/Downloads/punkdoku-macos /usr/local/bin/punkdoku
-# chmod +x /usr/local/bin/punkdoku
+# For Apple Silicon Macs:
+curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos-arm64
+
+# Make it executable
+chmod +x punkdoku
+
+# Move to your PATH (optional)
+sudo mv punkdoku /usr/local/bin/
 ```
 
 #### Linux
 ```bash
-# Using curl (recommended)
-curl -L https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux -o /usr/local/bin/punkdoku
-chmod +x /usr/local/bin/punkdoku
+# Download the binary
+curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux
 
-# If curl is not available, use wget
-wget -O /usr/local/bin/punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux
-chmod +x /usr/local/bin/punkdoku
+# Make it executable
+chmod +x punkdoku
 
-# If neither is available, download manually from browser
-# 1. Download punkdoku-linux from https://github.com/daypunk/punkdoku/releases/latest
-# 2. Run these commands in terminal:
-# mv ~/Downloads/punkdoku-linux /usr/local/bin/punkdoku
-# chmod +x /usr/local/bin/punkdoku
+# Move to your PATH (optional)
+sudo mv punkdoku /usr/local/bin/
 ```
 
 ### 🚀 Running the Game
@@ -96,59 +85,33 @@ punkdoku
 
 ## How to Play
 
-1. **Launch**: Run `punkdoku` in your terminal
-2. **Navigate**: Use arrow keys to move around
-3. **Input**: Press `1-9` to place numbers, `0` to clear
-4. **Settings**: Press `a` for auto-check, `t` for timer
+Run `punkdoku` in your terminal and use:
+- **Arrow keys** to navigate
+- **1-9** to place numbers
+- **0** or **Space** to clear cells
+- **u** to undo
+- **a** to toggle auto-check
+- **t** to toggle timer
+- **m** to return to menu
+- **q** to quit
 
-### Difficulty Levels
-- **Easy**: Perfect for beginners
-- **Normal**: Balanced challenge
-- **Hard**: Requires strategy
-- **Lunatic**: Expert level
-- **Daily**: Everyone gets the same puzzle based on the date
+## Game Modes
 
-### Controls
-- **Arrow keys**: Navigate the grid
-- **1-9**: Place numbers
-- **0/Space**: Clear cell
-- **u**: Undo last move
-- **a**: Toggle auto-check (highlights mistakes)
-- **t**: Toggle timer
-- **m**: Return to main menu
-- **q**: Quit
+- **Easy** - Good for beginners
+- **Normal** - Balanced challenge
+- **Hard** - Requires strategy
+- **Lunatic** - Expert level
+- **Daily(=Normal)** - Same puzzle for everyone, changes daily
 
 ## Features
 
-- **Clean interface**: Minimalist design that stays out of your way
-- **Daily puzzles**: Same puzzle for everyone, changes each day
-- **Smart generation**: Every puzzle has exactly one solution
-- **Undo/Redo**: Full move history
-- **Auto-check**: Optional real-time error highlighting
-- **Timer**: Track your solving speed
-
-## Technical Details
-
-The game generates puzzles by starting with a complete solution and carefully removing numbers while ensuring uniqueness. Daily puzzles use the UTC date as a seed, so everyone worldwide gets the same puzzle.
-
-- Generator uses backtracking with randomization
-- Solver verifies puzzle uniqueness
-- UI built with Bubble Tea and Lipgloss
-- Single binary, no dependencies
-
-## Project Structure
-```text
-cmd/
-  punkdoku/
-    main.go              # entrypoint
-internal/
-  config/               # YAML load/save under ~/.punkdoku
-  game/                 # board state, moves, duplicates/conflicts
-  generator/            # difficulty params, daily seeding, carving
-  solver/               # backtracking solver + uniqueness counting
-  theme/                # color palette (Punk theme)
-  ui/                   # Bubble Tea app, model, view, styles, keymap
-```
+- Clean, minimalist interface
+- Daily puzzles with shared seeds
+- Smart puzzle generation (unique solutions only)
+- Undo/redo functionality
+- Real-time error checking
+- Built-in timer
+- No external dependencies
 
 ## Development
 
@@ -156,10 +119,12 @@ internal/
 # Run locally
 go run ./cmd/punkdoku
 
-# Build
+# Build binary
 go build -o punkdoku ./cmd/punkdoku
 ```
 
-Built for modern terminals with Unicode support. Works best with monospace fonts and true color support.
+Requires Go 1.23+ and works best with terminals that support Unicode and true color.
 
-This project is licensed under the MIT License. Please credit the original source when reusing.
+## License
+
+MIT License - feel free to use and modify as needed.
