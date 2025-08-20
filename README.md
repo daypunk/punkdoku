@@ -104,7 +104,7 @@ Run **`punkdoku`** in your terminal and use:
 
 ## Features
 
-- Clean, minimalist interface
+- Cute! minimalist interface
 - Daily puzzles with shared seeds
 - Smart puzzle generation (unique solutions only)
 - Undo/redo functionality
