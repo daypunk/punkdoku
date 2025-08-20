@@ -34,52 +34,52 @@
 </p>
 
 ### 개요
-`punkdoku`는 macOS, Linux에서 동일하게 동작하는 터미널 스도쿠 게임입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, 4개의 난이도 모드는 나노초 기반 시드를 사용해 퍼즐을 생성하고, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
+# Run ��
+<span style="color:rgb(182, 11, 255); font-weight: bold;">punkdoku</span>는 macOS, Linux에서 즐기는 <span style="color:rgb(182, 11, 255); font-weight: bold;">터미널 스도쿠 게임</span>입니다. Go로 작성되었고 Bubble Tea와 Lipgloss로 보기 좋은 TUI를 제공합니다. 퍼즐은 난이도별로 생성되며, 4개의 난이도 모드는 나노초 기반 시드를 사용해 퍼즐을 생성하고, Daily 모드는 UTC 날짜 기반 시드를 사용해 모든 사용자가 동일한 퍼즐을 받습니다. 입력 애니메이션, Undo, Auto‑Check, 타이머 등을 지원합니다.
 
 ### Overview
-`punkdoku` is a terminal Sudoku game that runs identically on macOS and Linux. It is written in Go and provides a visually appealing TUI built with Bubble Tea and Lipgloss. Puzzles are generated per difficulty level: the four difficulty modes use a nanosecond-based seed to create unique puzzles, while Daily mode uses a UTC date-based seed so that all players receive the same puzzle. The game supports input animations, undo, auto-check, and a timer.
+<span style="color:rgb(182, 11, 255); font-weight: bold;">punkdoku</span> is a <span style="color:rgb(182, 11, 255); font-weight: bold;">terminal Sudoku game</span> that runs identically on macOS and Linux. It is written in Go and provides a visually appealing TUI built with Bubble Tea and Lipgloss. Puzzles are generated per difficulty level: the four difficulty modes use a nanosecond-based seed to create unique puzzles, while Daily mode uses a UTC date-based seed so that all players receive the same puzzle. The game supports input animations, undo, auto-check, and a timer.
 
 ## Quick Start
 
 ### Option 1: 🍺 Homebrew (Recommended)
 ```bash
+# Download
 brew install daypunk/tap/punkdoku
+
+# Run 🚀
+punkdoku
 ```
 
 ### Option 2: Manual Download
 
 #### macOS
 ```bash
-# Download the binary (choose based on your Mac's processor)
-# For Intel Macs:
-curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos-amd64
-
-# For Apple Silicon Macs:
-curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos-arm64
+# Download
+curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-macos-$(uname -m | sed 's/x86_64/amd64/')
 
 # Make it executable
 chmod +x punkdoku
 
-# Move to your PATH (optional)
+# Move to your PATH
 sudo mv punkdoku /usr/local/bin/
+
+# Run 🚀
+punkdoku
 ```
 
 #### Linux
 ```bash
-# Download the binary
+# Download
 curl -L -o punkdoku https://github.com/daypunk/punkdoku/releases/latest/download/punkdoku-linux
 
 # Make it executable
 chmod +x punkdoku
 
-# Move to your PATH (optional)
+# Move to your PATH
 sudo mv punkdoku /usr/local/bin/
-```
 
-### 🚀 Running the Game
-After installation, run the game from the **terminal** using:
-
-```bash
+# Run 🚀
 punkdoku
 ```
 
@@ -97,15 +97,15 @@ Run `punkdoku` in your terminal and use:
 
 ## Game Modes
 
-- **🍼 Easy** - Good for beginners
-- **🌞 Normal** - Balanced challenge
-- **🌚 Hard** - Requires strategy
-- **🥀 Lunatic** - Expert level
-- **🌞 Daily(=Normal)** - Same puzzle for everyone, changes daily
+- **<span style="color:rgb(0, 183, 255); font-weight: bold;">Easy</span>** - Good for beginners
+- **<span style="color:rgb(4, 200, 79); font-weight: bold;">Normal</span>** - Balanced challenge
+- **<span style="color:rgb(242, 95, 26); font-weight: bold;">Hard</span>** - Requires strategy
+- **<span style="color:rgb(182, 11, 255); font-weight: bold;">Lunatic</span>** - Expert level
+- **<span style="color:rgb(4, 200, 79); font-weight: bold;">Daily</span>** - Same puzzle for everyone, changes daily
 
 ## Features
 
-- Clean, minimalist interface
+- Cute, minimalist interface
 - Daily puzzles with shared seeds
 - Smart puzzle generation (unique solutions only)
 - Undo/redo functionality
