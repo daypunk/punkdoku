@@ -1,7 +1,7 @@
 <h1 align="center">Punkdoku</h1>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="600" alt="punkdoku">
+  <img src="https://github.com/user-attachments/assets/f682f2c5-ce94-46ca-bb93-3dfe01784130" width="600" alt="punkdoku">
 </div>
 
 <div align="center">
