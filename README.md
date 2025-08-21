@@ -4,7 +4,13 @@
   <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="600" alt="punkdoku">
 </div>
 
-<div align="center">
+<style>
+  .badge-container a {
+    text-decoration: none;
+  }
+</style>
+
+<div class="badge-container" align="center">
   <!-- Repo Stats -->
   <a href="https://github.com/daypunk/punkdoku/stargazers">
     <img src="https://img.shields.io/github/stars/daypunk/punkdoku?style=plastic&logo=apachespark&label=Stars&logoColor=FFD700&labelColor=222&color=FFD700" alt="GitHub Stars"/>
