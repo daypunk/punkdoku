@@ -4,21 +4,15 @@
   <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="600" alt="punkdoku">
 </div>
 
-<style>
-  .badge-container a {
-    text-decoration: none;
-  }
-</style>
-
-<div class="badge-container" align="center">
+<div align="center">
   <!-- Repo Stats -->
-  <a href="https://github.com/daypunk/punkdoku/stargazers">
+  <a href="https://github.com/daypunk/punkdoku/stargazers"  style="text-decoration: none;">
     <img src="https://img.shields.io/github/stars/daypunk/punkdoku?style=plastic&logo=apachespark&label=Stars&logoColor=FFD700&labelColor=222&color=FFD700" alt="GitHub Stars"/>
   </a>
-  <a href="https://github.com/daypunk/punkdoku/releases/latest">
+  <a href="https://github.com/daypunk/punkdoku/releases/latest"  style="text-decoration: none;">
     <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=plastic&logo=github&logoColor=white&label=Release&labelColor=222&color=ccc" alt="Latest Release"/>
   </a>
-  <a href="https://github.com/daypunk/punkdoku/releases">
+  <a href="https://github.com/daypunk/punkdoku/releases"  style="text-decoration: none;">
     <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=222&color=ccc" alt="Downloads"/>
   </a>
 </div>
