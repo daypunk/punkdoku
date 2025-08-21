@@ -22,15 +22,15 @@
   <!-- Tech Stack -->
   <img src="https://img.shields.io/badge/Go-1.23+-66E3FF?style=plastic&logo=go&labelColor=FFF" alt="Go Version"/>
   <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-FFB3C7?style=plastic&logo=ntfy&labelColor=FFF&logoColor=FF79C6" alt="TUI Framework"/>
-  <img src="https://img.shields.io/badge/macOS-fff?style=plastic&logo=apple&logoColor=black" alt="macOS"/>
-  <img src="https://img.shields.io/badge/Linux-fff?style=plastic&logo=linux&logoColor=black" alt="Linux"/>
 </div>
 
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Binary-4.8MB-000?style=plastic&labelColor=000" alt="Binary Size"/>
+  <img src="https://img.shields.io/badge/macOS-ccc?style=plastic&logo=apple&labelColor=fff&logoColor=black" alt="macOS"/>
+  <img src="https://img.shields.io/badge/Linux-ccc?style=plastic&logo=linux&labelColor=fff&logoColor=black" alt="Linux"/>
+  <img src="https://img.shields.io/badge/Binary-4.8MB-ccc?style=plastic&labelColor=fff" alt="Binary Size"/>
   <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-000?style=plastic&&labelColor=000&logoColor=white" alt="License"/>
+    <img src="https://img.shields.io/badge/License-MIT-ccc?style=plastic&&labelColor=fff&logoColor=white" alt="License"/>
   </a>
 </div>
 <br>
