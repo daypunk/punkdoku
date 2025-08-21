@@ -15,10 +15,8 @@
   <a href="https://github.com/daypunk/punkdoku/releases">
     <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=000&color=E05E00" alt="Downloads"/>
   </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-000?style=plastic&&labelColor=000&logoColor=white" alt="License"/>
-  </a>
 </div>
+<br>
 
 <div align="center">
   <!-- Tech Stack -->
@@ -26,7 +24,14 @@
   <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-FFB3C7?style=plastic&logo=ntfy&labelColor=FFF&logoColor=FF79C6" alt="TUI Framework"/>
   <img src="https://img.shields.io/badge/macOS-fff?style=plastic&logo=apple&logoColor=black" alt="macOS"/>
   <img src="https://img.shields.io/badge/Linux-fff?style=plastic&logo=linux&logoColor=black" alt="Linux"/>
+</div>
+
+
+<div align="center">
   <img src="https://img.shields.io/badge/Binary-4.8MB-000?style=plastic&labelColor=000" alt="Binary Size"/>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-000?style=plastic&&labelColor=000&logoColor=white" alt="License"/>
+  </a>
 </div>
 <br>
 
