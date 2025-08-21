@@ -7,13 +7,13 @@
 <div align="center">
   <!-- Repo Stats -->
   <a href="https://github.com/daypunk/punkdoku/stargazers">
-    <img src="https://img.shields.io/github/stars/daypunk/punkdoku?style=plastic&logo=apachespark&logoColor=white&label=Stars&logoColor=FFD700&labelColor=000&color=E05E00" alt="GitHub Stars"/>
+    <img src="https://img.shields.io/github/stars/daypunk/punkdoku?style=plastic&logo=apachespark&label=Stars&logoColor=FFD700&labelColor=222&color=FFD700" alt="GitHub Stars"/>
   </a>
   <a href="https://github.com/daypunk/punkdoku/releases/latest">
-    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=plastic&logo=github&logoColor=white&label=Release&labelColor=000&color=E05E00" alt="Latest Release"/>
+    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=plastic&logo=github&logoColor=white&label=Release&labelColor=222&color=ccc" alt="Latest Release"/>
   </a>
   <a href="https://github.com/daypunk/punkdoku/releases">
-    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=000&color=E05E00" alt="Downloads"/>
+    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=222&color=ccc" alt="Downloads"/>
   </a>
 </div>
 <br>
@@ -40,8 +40,8 @@
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/🧩-Sudoku-6929C4?style=plastic&labelColor=000" alt="Sudoku"/>
-  <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-6929C4?style=plastic&labelColor=000" alt="Daily Seed Puzzles"/>
+  <img src="https://img.shields.io/badge/🧩-Sudoku-ccc?style=plastic&labelColor=fff" alt="Sudoku"/>
+  <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-ccc?style=plastic&labelColor=fff" alt="Daily Seed Puzzles"/>
 </p>
 
 ### 개요
