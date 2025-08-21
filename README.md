@@ -1,36 +1,42 @@
-# punkdoku
+<h1 align="center">Punkdoku</h1>
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/8bb7cf23-51b1-4db6-86f8-ef8c96bf6661" width="600" alt="punkdoku">
 </div>
 
 <div align="center">
+  <!-- Repo Stats -->
+  <a href="https://github.com/daypunk/punkdoku/stargazers">
+    <img src="https://img.shields.io/github/stars/daypunk/punkdoku?style=plastic&logo=apachespark&logoColor=white&label=Stars&logoColor=FFD700&labelColor=000&color=E05E00" alt="GitHub Stars"/>
+  </a>
   <a href="https://github.com/daypunk/punkdoku/releases/latest">
-    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=flat&logo=github&color=ff6b6b" alt="Latest Release"/>
+    <img src="https://img.shields.io/github/v/release/daypunk/punkdoku?style=plastic&logo=github&logoColor=white&label=Release&labelColor=000&color=E05E00" alt="Latest Release"/>
   </a>
   <a href="https://github.com/daypunk/punkdoku/releases">
-    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=flat&logo=download&color=4ecdc4" alt="Downloads"/>
-  </a>
-  <a href="https://golang.org/">
-    <img src="https://img.shields.io/badge/Go-1.23+-00ADD8?style=flat&logo=go&logoColor=white" alt="Go Version"/>
+    <img src="https://img.shields.io/github/downloads/daypunk/punkdoku/total?style=plastic&logo=github&logoColor=white&label=Downloads&labelColor=000&color=E05E00" alt="Downloads"/>
   </a>
   <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat" alt="License"/>
+    <img src="https://img.shields.io/badge/License-MIT-000?style=plastic&&labelColor=000&logoColor=white" alt="License"/>
   </a>
 </div>
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Linux-brightgreen?style=flat&logo=terminal" alt="Platforms"/>
-  <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-ff79c6?style=flat" alt="TUI Framework"/>
-  <img src="https://img.shields.io/badge/Binary%20Size-4.8MB-blue?style=flat" alt="Binary Size"/>
-</p><br>
+
+<div align="center">
+  <!-- Tech Stack -->
+  <img src="https://img.shields.io/badge/Go-1.23+-66E3FF?style=plastic&logo=go&labelColor=FFF" alt="Go Version"/>
+  <img src="https://img.shields.io/badge/TUI-Bubble%20Tea-FFB3C7?style=plastic&logo=ntfy&labelColor=FFF&logoColor=FF79C6" alt="TUI Framework"/>
+  <img src="https://img.shields.io/badge/macOS-fff?style=plastic&logo=apple&logoColor=black" alt="macOS"/>
+  <img src="https://img.shields.io/badge/Linux-fff?style=plastic&logo=linux&logoColor=black" alt="Linux"/>
+  <img src="https://img.shields.io/badge/Binary-4.8MB-000?style=plastic&labelColor=000" alt="Binary Size"/>
+</div>
+<br>
 
 <div align="center">
   <img width="600" alt="Image" src="https://github.com/user-attachments/assets/304f1911-3ec1-4311-9892-e7c5fb0d6f89" />
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/🧩-Sudoku-purple?style=flat" alt="Sudoku"/>
-  <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-purple?style=flat" alt="Daily Seed Puzzles"/>
+  <img src="https://img.shields.io/badge/🧩-Sudoku-6929C4?style=plastic&labelColor=000" alt="Sudoku"/>
+  <img src="https://img.shields.io/badge/📅-Daily%20Seed%20Puzzles-6929C4?style=plastic&labelColor=000" alt="Daily Seed Puzzles"/>
 </p>
 
 ### 개요
