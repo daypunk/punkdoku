@@ -49,7 +49,7 @@
 # Download
 brew install daypunk/tap/punkdoku
 
-# Run 🚀
+# Run 🧩
 punkdoku
 ```
 
@@ -66,7 +66,7 @@ chmod +x punkdoku
 # Move to your PATH
 sudo mv punkdoku /usr/local/bin/
 
-# Run 🚀
+# Run 🧩
 punkdoku
 ```
 
@@ -81,7 +81,7 @@ chmod +x punkdoku
 # Move to your PATH
 sudo mv punkdoku /usr/local/bin/
 
-# Run 🚀
+# Run 🧩
 punkdoku
 ```
 
